@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+  color: green;
+}
+head {
+    text-align: center;
+}
+footer {
+    text-align: center;
+    align-content: flex-end;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+#submit_Dates {
+    text-align: center;
+}

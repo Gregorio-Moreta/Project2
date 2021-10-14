@@ -1,0 +1,72 @@
+////////////////////////////////////////
+// Import Dependencies
+////////////////////////////////////////
+const express = require("express");
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const { application } = require("express");
+
+/////////////////////////////////////////
+// Create Route
+/////////////////////////////////////////
+const router = express.Router();
+
+/////////////////////////////////////////
+// Routes
+/////////////////////////////////////////
+
+// The Signup Routes (Get => form, post => submit form)
+router.get("/signup", (req, res) => {
+    res.render("user/signup.ejs")
+})
+
+router.post("/signup", async (req, res) => {
+    // hashing the password
+   req.body.password = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
+   // create the new user
+   User.create(req.body, (err, user) => {
+       console.log(user)
+       res.redirect("/user/login")
+   })
+
+})
+
+// The login Routes (Get => form, post => submit form)
+router.get("/login", (req, res) => {
+    res.render("user/login.ejs")
+})
+
+router.post("/login", (req, res) => {
+    // get the data from the request body
+    const { username, password } = req.body;
+    User.findOne({ username }, (err, user) => {
+      // checking if userexists
+      if (!user) {
+        res.send("user doesn't exist");
+      } else {
+        //check if password matches
+        const result = bcrypt.compareSync(password, user.password);
+        if (result) {
+              // save login info in sessions
+          req.session.loggedIn = true
+          req.session.username = username
+        // redirect to fruits page  
+          res.redirect("/fruits");
+        } else {
+          res.send("wrong password");
+        }
+      }
+    });
+  });
+
+  router.get("/logout", (req, res) => {
+    // destroy session and redirect to main page
+    req.session.destroy((err) => {
+        res.redirect("/")
+    })
+})
+
+//////////////////////////////////////////
+// Export the Router
+//////////////////////////////////////////
+module.exports = router;

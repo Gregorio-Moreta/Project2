@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/header") %>
+    
+      <div class="row">
+          <form class="row">
+            <div class="column">
+                <label for="start_date">Start Date</label></br>
+                <input type="text" placeholder="Please Enter Your Start Date!" name="start_date"></br>
+            </div>
+            <div class="column">
+                <label for="End_date">End Date</label></br>
+                <input type="text" placeholder="Please Enter Your End Date!" name="end_date"></br>
+            </div>
+            <div class="center_btn">
+                <input id="submit_Dates" type="submit" value="Submit">
+            </div>
+        </form>
+      </div>
+    </br>
+        <div>
+            <h1>Days Until</h1>
+        </div>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+</html>

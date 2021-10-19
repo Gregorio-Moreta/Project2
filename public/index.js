@@ -5,6 +5,8 @@ function handleForm(event) {
     console.log(`Date 1: ${date1}, Date 2: ${date2}`);
     let diffDays = Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60 / 24);
     console.log(diffDays);
+    document.getElementById('count-down').innerHTML= diffDays;
+
 }
 
 const inputs = document.querySelectorAll('form');

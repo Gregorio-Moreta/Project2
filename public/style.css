@@ -12,6 +12,11 @@ footer {
     display: flex;
     flex-direction: column;
 }
+table, td, th, tr {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 2px solid black;
+}
 .row {
   display: flex;
 }
